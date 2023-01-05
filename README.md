@@ -24,6 +24,6 @@ This project aims to practice my skills with web automation using Python, Seleni
 
 - Xampp server with MySql.
 
-- Selenium (webdriver, geckofriver).
+- Selenium (webdriver, geckodriver).
 
 - Mozila firefox.
