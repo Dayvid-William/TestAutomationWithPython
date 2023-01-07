@@ -18,6 +18,8 @@ This project aims to practice my skills with web automation using Python, Seleni
 
 - It is recommended that before test executions, the databases have no registered data other than the standard Root data.
 
+- It is recommended that each test be run individually with the exception of the login test which must be run together with each of the tests.
+
 #### programs and features used in testing ####
 
 - Python with Pytest.
