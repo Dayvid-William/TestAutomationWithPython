@@ -7,13 +7,14 @@ browser = webdriver.Firefox()
 
 def testLoginWithUserRoot(rootUser, rootPassword):
   browser.get("http://localhost/mantisbt/mantisbt-2.25.4/login_page.php?cookie_error=1")
+  browser.maximize_window()
   browser.find_element(By.ID, "username").send_keys(rootUser)
   browser.find_element(By.XPATH, "//*[@id=\"login-form\"]/fieldset/input[2]").click()
   browser.find_element(By.ID, "password").send_keys(rootPassword)
  
   browser.find_element(By.XPATH, "//*[@id=\"login-form\"]/fieldset/input[3]").click()
-  userBoxNameText = browser.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/ul/li[3]/a/span").text
-  if userBoxNameText == rootUser:
+  userNameTextBox = browser.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/ul/li[3]/a/span").text
+  if userNameTextBox == rootUser:
     print("Successful login!")
   else:
     print("Login user is not expected!")
@@ -31,13 +32,31 @@ def testAddRealName(realName, rootUser):
   browser.find_element(By.XPATH, "//*[@id=\"sidebar\"]/ul/li[6]/a/span").click()
   browser.find_element(By.LINK_TEXT, "Gerenciar Usuários").click()
 
-  realNameBoxText = browser.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div/div/div[4]/div[2]/div[2]/div/table/tbody/tr/td[2]").text
-  if realNameBoxText == realName:
+  realNameTextBox = browser.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div/div/div[4]/div[2]/div[2]/div/table/tbody/tr/td[2]").text
+  if realNameTextBox == realName:
     print("Real name changed successfully!")
     browser.close()
   else:
     print("Real name is not expected!")
 
+def switchEmail(email):
+  browser.find_element(By.XPATH, "//*[@id=\"sidebar\"]/ul/li[6]/a/span").click()
+  browser.find_element(By.LINK_TEXT, "Gerenciar Usuários").click()
+  browser.find_element(By.XPATH, "//*[@id=\"main-container\"]/div[2]/div[2]/div/div/div[4]/div[2]/div[2]/div/table/tbody/tr/td[1]/a").click()
+  
+  browser.find_element(By.ID, "email-field").clear()
+  browser.find_element(By.ID, "email-field").send_keys(email)
+  browser.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div/div/div[2]/form/div/div[2]/div[2]/input").click()
+
+  browser.find_element(By.XPATH, "//*[@id=\"sidebar\"]/ul/li[6]/a/span").click()
+  browser.find_element(By.LINK_TEXT, "Gerenciar Usuários").click()
+  
+  emailTextBox = browser.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div/div/div[4]/div[2]/div[2]/div/table/tbody/tr/td[3]").text
+  if emailTextBox == email:
+    print("Email changed successfully!")
+  else:
+    print("Email is not expected!")
   
 testLoginWithUserRoot("administrator", "root")
 testAddRealName("dayvid", "administrator")
+switchEmail("email@email.com")
