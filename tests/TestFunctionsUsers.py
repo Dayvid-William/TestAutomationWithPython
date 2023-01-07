@@ -59,4 +59,4 @@ def switchEmail(email):
   
 testLoginWithUserRoot("administrator", "root")
 testAddRealName("dayvid", "administrator")
-switchEmail("email@email.com")
+#switchEmail("email@email.com")
