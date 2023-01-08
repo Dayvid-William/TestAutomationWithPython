@@ -39,7 +39,7 @@ def testAddRealName(realName, rootUser):
   else:
     print("Real name is not expected!")
 
-def switchEmail(email):
+def testSwitchEmail(email):
   browser.find_element(By.XPATH, "//*[@id=\"sidebar\"]/ul/li[6]/a/span").click()
   browser.find_element(By.LINK_TEXT, "Gerenciar Usuários").click()
   browser.find_element(By.XPATH, "//*[@id=\"main-container\"]/div[2]/div[2]/div/div/div[4]/div[2]/div[2]/div/table/tbody/tr/td[1]/a").click()
@@ -56,7 +56,19 @@ def switchEmail(email):
     print("Email changed successfully!")
   else:
     print("Email is not expected!")
+
+def testChangeAccessLevel():
+  browser.find_element(By.XPATH, "/html/body/div[2]/div[1]/ul/li[6]/a/i").click()
+  browser.find_element(By.LINK_TEXT, "Gerenciar Usuários").click()
+  browser.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div/div/div[4]/div[2]/div[2]/div/table/tbody/tr/td[1]/a").click()
+
+  browser.find_element(By.ID, "edit-access-level").click()
+  browser.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div/div/div[2]/form/div/div[2]/div[1]/div/div/table/tbody/tr[4]/td[2]/select/option[5]").click()
+  browser.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div/div/div[2]/form/div/div[2]/div[2]/input").click()
+
   
+
 testLoginWithUserRoot("administrator", "root")
-testAddRealName("dayvid", "administrator")
-#switchEmail("email@email.com")
+testChangeAccessLevel()
+#testAddRealName("dayvid", "administrator")
+#testSwitchEmail("email@email.com")
