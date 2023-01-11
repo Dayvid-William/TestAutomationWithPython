@@ -1,8 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-import pytest
 from selenium.webdriver.support.wait import WebDriverWait
+import time
 
 browser = webdriver.Firefox()
 
@@ -34,7 +34,7 @@ def testCreateUser(newUser, passwordNewUser, email, realName):
   browser.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div/div/div[2]/form/div/div[2]/div/div/table/tbody/tr[4]/td[2]/select/option[4]").click()
 
   browser.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div/div/div[2]/form/div/div[3]/input").click()
-  browser.set_script_timeout(60)
+  time.sleep(50)
 
   browser.find_element(By.LINK_TEXT, "Gerenciar Usuários").click()
   element = WebDriverWait(driver, 5000).until(EC.presence_of_element_located((By.XPATH, '/html/body/div[2]/div[2]/div[2]/div/div/div[4]/div[2]/div[2]/div/table/tbody/tr/td[1]/a')))
