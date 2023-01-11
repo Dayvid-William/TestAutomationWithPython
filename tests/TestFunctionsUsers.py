@@ -85,18 +85,28 @@ def testSwitchEmail(email):
     print("Email is not expected!")
 
 
-def testChangeAccessLevel():
+def testChangeAccessLevel(user):
   browser.find_element(By.XPATH, "/html/body/div[2]/div[1]/ul/li[6]/a/i").click()
   browser.find_element(By.LINK_TEXT, "Gerenciar Usuários").click()
-  browser.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div/div/div[4]/div[2]/div[2]/div/table/tbody/tr/td[1]/a").click()
+  browser.find_element(By.LINK_TEXT, user).click()
 
   browser.find_element(By.ID, "edit-access-level").click()
-  browser.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div/div/div[2]/form/div/div[2]/div[1]/div/div/table/tbody/tr[4]/td[2]/select/option[5]").click()
+  browser.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div/div/div[2]/form/div/div[2]/div[1]/div/div/table/tbody/tr[4]/td[2]/select/option[4]").click()
   browser.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div/div/div[2]/form/div/div[2]/div[2]/input").click()
+  
+  time.sleep(120)
+  browser.find_element(By.LINK_TEXT, "Gerenciar Usuários").click()
+  time.sleep(10)
+  
+  accessLevelTextBox = browser.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div/div/div[4]/div[2]/div[2]/div/table/tbody/tr[2]/td[4]").text
+  if accessLevelTextBox == "desenvolvedor":
+    print("Access level changed successfully!")
+  else:
+    print("Acess level is not expected!")
 
 
 testLoginWithUserRoot("administrator", "root")
-testCreateUser("Thiago12", "12345", "thiago@email.com", "Thiago")
-#testChangeAccessLevel()
+#testCreateUser("Thiago12", "12345", "thiago@email.com", "Thiago")
+testChangeAccessLevel("Thiago12")
 #testAddRealName("dayvid", "Dayvid")
 #testSwitchEmail("email@email.com")
