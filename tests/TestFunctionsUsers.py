@@ -107,6 +107,6 @@ def testChangeAccessLevel(user):
 
 testLoginWithUserRoot("administrator", "root")
 #testCreateUser("Thiago12", "12345", "thiago@email.com", "Thiago")
-testChangeAccessLevel("Thiago12")
+#testChangeAccessLevel("Thiago12")
 #testAddRealName("dayvid", "Dayvid")
 #testSwitchEmail("email@email.com")
