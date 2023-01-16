@@ -24,19 +24,14 @@ def testLoginWithUserRoot(rootUser, rootPassword):
 def testCreateNewProfile(Plat, os, osb, description):
   browser.find_element(By.XPATH, "//*[@id=\"sidebar\"]/ul/li[6]/a").click()
   
-  ##clicar no elmento de link text "Gerenciar Perfís Globais"
   browser.find_element(By.LINK_TEXT, "Gerenciar Perfís Globais").click()
-  ##digitar no elmento de id "platform" o texto do parametro "plat"
   browser.find_element(By.ID, "platform").send_keys(Plat)
-  ##digitar no elemento de id "os" o texto do parametro "os"
   browser.find_element(By.ID, "os").send_keys(os)
-  ##ditar no campo de id "os_build" o texto do parametro "osb"
   browser.find_element(By.ID, "os_build").send_keys(osb)
-  ##digitar no campo de id "description" o texto do parametro "description"
   browser.find_element(By.ID, "description").send_keys(description)
-  ## clicar no elemnto de xpath "//*[@id="account-profile-form"]/fieldset/div/div[3]/button"
+  
   browser.find_element(By.XPATH, "//*[@id=\"account-profile-form\"]/fieldset/div/div[3]/button").click()
-  ##verificar se o perfil foi adicionado
+
   time.sleep(3)
   perfilTextBox = browser.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div/div/div[2]/div/div[2]/div/div/table/tbody/tr/td[1]").text
   
@@ -45,7 +40,25 @@ def testCreateNewProfile(Plat, os, osb, description):
   else:
     print("Profile was not created !")
   
+def testChangingProfileInformation(alteration):
+  browser.find_element(By.XPATH, "/html/body/div[2]/div[1]/ul/li[6]/a/i").click()
+  browser.find_element(By.LINK_TEXT, "Gerenciar Perfís Globais").click()
+  browser.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div/div/div[2]/div/div[2]/div/div/table/tbody/tr/td[4]/div/div[1]/form/button").click()
+  
+  #Digitar no elemnto de id "os_build" o texto do parametro "alteration"
+  browser.find_element(By.ID, "os_build").clear()
+  browser.find_element(By.ID, "os_build").send_keys(alteration)
+  #clicar no elmento de xpath "/html/body/div[2]/div[2]/div[2]/div/div/form/div/div[2]/div[2]/button"
+  browser.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div/div/form/div/div[2]/div[2]/button").click()
+  #Verificar se a altersação foi feita
+  time.sleep(3)
+  osvTextBox = browser.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div/div/div[2]/div/div[2]/div/div/table/tbody/tr/td[3]").text
+  if osvTextBox == alteration:
+    print("Successfully changed profile!")
+  else:
+    print("Change was not made!")
   
 
 testLoginWithUserRoot("administrator", "root")
-testCreateNewProfile("python", "linux", "10.32", "Profile for tests")
+#testCreateNewProfile("python", "linux", "10.32", "Profile for tests")
+#testChangingProfileInformation("13.24")
